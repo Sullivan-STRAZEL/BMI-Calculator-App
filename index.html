@@ -15,20 +15,23 @@
       <h1>Calculateur <strong>d'IMC</strong></h1>
 
       <form method="#" action="#">
-         <label for="size-input">Votre taille en centimètres
-         <input type="number" name="size-input" id="size-input" placeholder="Votre taille en centimètres" minlength="3" maxlength="3" min="1">
-         </label>
-
-         <label for="weight-input">Votre poids en kg
-         <input type="number" name="weight-input" id="weight-input" placeholder="Votre poids en kg" minlength="2" maxlength="3" min="1">
-         </label>
+        <div class="size-container">
+          <label for="size-input">Votre taille en centimètres</label>
+          <input type="number" name="size-input" id="size-input" placeholder="Votre taille en centimètres" minlength="3" maxlength="3" min="1">
+        </div>
+         
+        <div class="weight-container">
+          <label for="weight-input">Votre poids en kg</label>
+          <input type="number" name="weight-input" id="weight-input" placeholder="Votre poids en kg" minlength="2" maxlength="3" min="1">
+        </div>
+         
       </form>
 
-      <button>Calculer l'IMC</button>
+      <button>Calculer un IMC</button>
 
-      <div class="calculation-result"></div>
+      <div class="calculation-result">0</div>
 
-      <div class="calculation-text"></div>
+      <div class="calculation-text">En attente du résultat...</div>
 
     </div>
     <script src="app.js"></script>

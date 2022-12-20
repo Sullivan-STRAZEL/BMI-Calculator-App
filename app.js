@@ -1,5 +1,3 @@
-"use strict";
-
 function GetBMIResult() {
    
    let sizeInput = document.querySelector("#size-input").value;
@@ -21,13 +19,13 @@ function GetBMIResult() {
    ];
 
    if (BMIResult <= 0) {
-      calculationText.textContent = BMIData[0].name
+      calculationText.textContent = `Résultat: ${BMIData[0].name}`
    }
    else if (BMIResult > BMIData[BMIData.length - 1].range) {
-      calculationText.textContent = BMIData[BMIData.length - 1].name
+      calculationText.textContent = `Résultat: ${BMIData[BMIData.length - 1].name}`
    }
    else {
-      calculationText.textContent = BMIData[BMIData.indexOf(BMIData.find(el => BMIResult > el.range[0] && BMIResult <= el.range[1]))].name
+      calculationText.textContent = `Résultat: ${BMIData[BMIData.indexOf(BMIData.find(el => BMIResult > el.range[0] && BMIResult <= el.range[1]))].name}`
    }
 
 }
