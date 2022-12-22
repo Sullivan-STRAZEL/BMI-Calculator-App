@@ -1,14 +1,43 @@
-function GetBMIResult() {
-   
-   let sizeInput = document.querySelector("#size-input").value;
-   let weightInput = document.querySelector("#weight-input").value;
-   let calculationResult = document.querySelector(".calculation-result");
-   let calculationText = document.querySelector(".calculation-text");
+function ArePromptsCorrect() {
+   function IsSizeCorrect() {
+      const calculationResult = document.querySelector(".calculation-result");
+      const calculationText = document.querySelector(".calculation-text");
+      const sizeInput = document.querySelector("#size-input").value;
+      const minSize = 10;
+      const maxSize = 299;
 
-   let BMIResult = (weightInput / Math.pow(sizeInput/100, 2)).toFixed(1);
+      if (sizeInput >= minSize && sizeInput <= maxSize) {
+         return true;
+      }
+      else {
+         calculationResult.textContent = 0;
+         calculationResult.style.color = "black";
+         calculationText.textContent = "Taille non valide";
+      }
+   }
    
-   calculationResult.textContent = BMIResult;
+   function isWeightCorrect() {
+      const calculationResult = document.querySelector(".calculation-result");
+      const calculationText = document.querySelector(".calculation-text");
+      const weightInput = document.querySelector("#weight-input").value;
+      const minWeight = 10;
+      const maxWeight = 999;
 
+      if (weightInput >= minWeight && weightInput <= maxWeight) {
+         return true;
+      }
+      else {
+         calculationResult.textContent = 0;
+         calculationResult.style.color = "black";
+         calculationText.textContent = "Poids non valide";
+      }
+   }
+
+   return IsSizeCorrect() && isWeightCorrect();
+}
+
+function GetResults() {
+   //Décalaration des variables
    const BMIData = [
       { name: "Maigreur", color: "midnightblue", range: [0, 18.5] },
       { name: "Bonne santé", color: "green", range: [18.5, 25] },
@@ -17,19 +46,32 @@ function GetBMIResult() {
       { name: "Obésité sévère", color: "crimson", range: [35, 40] },
       { name: "Obésité morbide", color: "purple", range: 40 }
    ];
+   const sizeInput = document.querySelector("#size-input").value;
+   const weightInput = document.querySelector("#weight-input").value;
+   const calculationResult = document.querySelector(".calculation-result");
+   const calculationText = document.querySelector(".calculation-text");
 
-   if (BMIResult <= 0) {
-      calculationText.textContent = `Résultat: ${BMIData[0].name}`
-   }
-   else if (BMIResult > BMIData[BMIData.length - 1].range) {
-      calculationText.textContent = `Résultat: ${BMIData[BMIData.length - 1].name}`
+   // Calcul de l'IMC et du Résultat Texte
+   const BMIResult = (weightInput / Math.pow(sizeInput/100, 2)).toFixed(1);
+
+   if (BMIResult > BMIData[BMIData.length - 1].range) {
+      calculationResult.textContent = BMIResult;
+      calculationText.textContent = `Résultat : ${BMIData[BMIData.length - 1].name}`;
+      calculationResult.style.color = BMIData[BMIData.length - 1].color;
    }
    else {
-      calculationText.textContent = `Résultat: ${BMIData[BMIData.indexOf(BMIData.find(el => BMIResult > el.range[0] && BMIResult <= el.range[1]))].name}`
+      calculationResult.textContent = BMIResult;
+      calculationText.textContent = `Résultat : ${BMIData[BMIData.indexOf(BMIData.find(el => BMIResult > el.range[0] && BMIResult <= el.range[1]))].name}`;
+      calculationResult.style.color = BMIData[BMIData.indexOf(BMIData.find(el => BMIResult > el.range[0] && BMIResult <= el.range[1]))].color;
    }
-
 }
 
 const button = document.querySelector("button");
 
-button.addEventListener("click", GetBMIResult)
+button.addEventListener("click", e => {
+   e.preventDefault();
+
+   if (ArePromptsCorrect()) {
+      GetResults()
+   }
+});

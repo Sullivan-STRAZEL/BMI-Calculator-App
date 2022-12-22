@@ -23,25 +23,28 @@ body {
   max-width: 850px;
   background-color: #F1F1F1;
   border-radius: 5px;
-  box-shadow: 1px 2px 5px gray;
-  padding: 30px;
+  box-shadow: 1px 2px 5px #555555;
+  padding: 40px 30px;
 }
 
 h1 {
   flex: 0 0 100%;
   width: 100%;
   text-align: center;
-  padding: 20px;
+  margin-bottom: 15px;
   font-family: Raleway;
   font-weight: 400;
 }
 
 form {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   width: 100%;
 }
 
 .size-container, .weight-container {
+  flex: 0 0 50%;
   width: 50%;
   padding: 15px 10px;
 }
@@ -59,8 +62,13 @@ form input {
   border-bottom: 1px solid black;
   border-radius: 5px;
   box-shadow: 1px 2px 5px gray;
-  padding: 10px;
+  padding: 15px;
   font-size: 16px;
+}
+
+form input:focus {
+  background-color: #E8F0FE;
+  outline: none;
 }
 
 button {
@@ -73,6 +81,12 @@ button {
   box-shadow: 1px 2px 5px gray;
   padding: 10px 25px;
   margin: 20px 0;
+  transition: background-color .2s;
+}
+
+button:hover {
+  background-color: #eeb738;
+  cursor: pointer;
 }
 
 .calculation-result {
