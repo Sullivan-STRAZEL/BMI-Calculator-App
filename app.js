@@ -8,10 +8,12 @@ document
    });
 
 function ArePromptsCorrect() {
+   const calculationResult = document.querySelector(".calculation-result");
+   const calculationText = document.querySelector(".calculation-text");
+   const sizeInput = document.querySelector("#size-input").value;
+   const weightInput = document.querySelector("#weight-input").value;
+
    function IsSizeCorrect() {
-      const calculationResult = document.querySelector(".calculation-result");
-      const calculationText = document.querySelector(".calculation-text");
-      const sizeInput = document.querySelector("#size-input").value;
       const minSize = 10;
       const maxSize = 299;
 
@@ -26,9 +28,6 @@ function ArePromptsCorrect() {
    }
    
    function isWeightCorrect() {
-      const calculationResult = document.querySelector(".calculation-result");
-      const calculationText = document.querySelector(".calculation-text");
-      const weightInput = document.querySelector("#weight-input").value;
       const minWeight = 10;
       const maxWeight = 999;
 
