@@ -1,3 +1,12 @@
+document
+   .querySelector("button")
+   .addEventListener("click", e => {
+      e.preventDefault();
+      if (ArePromptsCorrect()) {
+         GetResults()
+      }
+   });
+
 function ArePromptsCorrect() {
    function IsSizeCorrect() {
       const calculationResult = document.querySelector(".calculation-result");
@@ -65,13 +74,3 @@ function GetResults() {
       calculationResult.style.color = BMIData[BMIData.indexOf(BMIData.find(el => BMIResult > el.range[0] && BMIResult <= el.range[1]))].color;
    }
 }
-
-const button = document.querySelector("button");
-
-button.addEventListener("click", e => {
-   e.preventDefault();
-
-   if (ArePromptsCorrect()) {
-      GetResults()
-   }
-});
