@@ -1,48 +1,102 @@
-document
-   .querySelector("button")
-   .addEventListener("click", e => {
-      e.preventDefault();
-      if (ArePromptsCorrect()) {
-         GetResults()
-      }
-   });
+document.querySelector("#size-input").addEventListener("input", () => {
+   const calculationResult = document.querySelector(".calculation-result");
+   const calculationText = document.querySelector(".calculation-text");
+   const size = document.querySelector("#size-input");
+   const sizeValue = document.querySelector("#size-input").value;
+   const minSize = 1;
+   const maxSize = 999;
+
+   if (sizeValue === "") {
+      size.style.border = "2px solid white";
+      calculationResult.textContent = 0;
+      calculationResult.style.color = "black";
+      calculationText.textContent = "En attente du résultat...";
+   }
+   else if (sizeValue >= minSize && sizeValue <= maxSize) {
+      size.style.border = "2px solid green";
+   }
+   else if (sizeValue < minSize || sizeValue > maxSize) {
+      size.style.border = "2px solid red";
+      size.style.backgroundColor = "white";
+      calculationResult.textContent = 0;
+      calculationResult.style.color = "black";
+      calculationText.textContent = "En attente du résultat...";
+   }
+}
+);
+
+document.querySelector("#weight-input").addEventListener("input", () => {
+   const calculationResult = document.querySelector(".calculation-result");
+   const calculationText = document.querySelector(".calculation-text");
+   const weight = document.querySelector("#weight-input");
+   const weightValue = document.querySelector("#weight-input").value;
+   const minWeight = 1;
+   const maxWeight = 999;
+
+   if (weightValue === "") {
+      weight.style.border = "2px solid white";
+   }
+   else if (weightValue >= minWeight && weightValue <= maxWeight) {
+      weight.style.border = "2px solid green";
+   }
+   else {
+      weight.style.border = "2px solid red";
+      weight.style.backgroundColor = "white";
+      calculationResult.textContent = 0;
+      calculationResult.style.color = "black";
+      calculationText.textContent = "En attente du résultat";
+   }
+}
+);
+
+document.querySelector("button").addEventListener("click", e => {
+   e.preventDefault();
+   if (ArePromptsCorrect()) {
+      GetResults()
+   }
+});
 
 function ArePromptsCorrect() {
    const calculationResult = document.querySelector(".calculation-result");
    const calculationText = document.querySelector(".calculation-text");
-   const sizeInput = document.querySelector("#size-input").value;
-   const weightInput = document.querySelector("#weight-input").value;
+   const sizeValue = document.querySelector("#size-input").value;
+   const weightValue = document.querySelector("#weight-input").value;
 
    function IsSizeCorrect() {
-      const minSize = 10;
-      const maxSize = 299;
+      const minSize = 1;
+      const maxSize = 999;
 
-      if (sizeInput >= minSize && sizeInput <= maxSize) {
+      if (sizeValue >= minSize && sizeValue <= maxSize) {
          return true;
       }
       else {
          calculationResult.textContent = 0;
          calculationResult.style.color = "black";
-         calculationText.textContent = "Taille non valide";
+         throw "Taille non valide";
       }
    }
    
    function isWeightCorrect() {
-      const minWeight = 10;
+      const minWeight = 1;
       const maxWeight = 999;
 
-      if (weightInput >= minWeight && weightInput <= maxWeight) {
+      if (weightValue >= minWeight && weightValue <= maxWeight) {
          return true;
       }
       else {
          calculationResult.textContent = 0;
          calculationResult.style.color = "black";
-         calculationText.textContent = "Poids non valide";
+         throw "Poids non valide";
       }
    }
 
-   return IsSizeCorrect() && isWeightCorrect();
-}
+   try {
+      return IsSizeCorrect() && isWeightCorrect();
+   }
+   catch (error) {
+      calculationText.textContent = error;
+   }
+};
 
 function GetResults() {
    //Décalaration des variables
@@ -54,13 +108,13 @@ function GetResults() {
       { name: "Obésité sévère", color: "crimson", range: [35, 40] },
       { name: "Obésité morbide", color: "purple", range: 40 }
    ];
-   const sizeInput = document.querySelector("#size-input").value;
-   const weightInput = document.querySelector("#weight-input").value;
+   const sizeValue = document.querySelector("#size-input").value;
+   const weightValue = document.querySelector("#weight-input").value;
    const calculationResult = document.querySelector(".calculation-result");
    const calculationText = document.querySelector(".calculation-text");
 
-   // Calcul de l'IMC et du Résultat Texte
-   const BMIResult = (weightInput / Math.pow(sizeInput/100, 2)).toFixed(1);
+   // Calcul de l'IMC chiffré et du Résultat Texte
+   const BMIResult = (weightValue / Math.pow(sizeValue/100, 2)).toFixed(1);
 
    if (BMIResult > BMIData[BMIData.length - 1].range) {
       calculationResult.textContent = BMIResult;
@@ -72,4 +126,4 @@ function GetResults() {
       calculationText.textContent = `Résultat : ${BMIData[BMIData.indexOf(BMIData.find(el => BMIResult > el.range[0] && BMIResult <= el.range[1]))].name}`;
       calculationResult.style.color = BMIData[BMIData.indexOf(BMIData.find(el => BMIResult > el.range[0] && BMIResult <= el.range[1]))].color;
    }
-}
+};

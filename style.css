@@ -6,14 +6,16 @@
   padding: 0;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@media all {
+
 body {
   min-height: 100vh;
   font-family: Lato, Helvetica, sans-serif;
   background: linear-gradient(to right, #36d1dc, #5b86e5);
   padding: clamp(20px, 5vw, 50px) 10px 10px;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 .container {
   display: flex;
@@ -45,7 +47,6 @@ form {
 
 .size-container, .weight-container {
   flex: 0 0 50%;
-  width: 50%;
   padding: 15px 10px;
 }
 
@@ -59,7 +60,7 @@ form label {
 form input {
   width: 95%;
   border: none;
-  border-bottom: 1px solid black;
+  border: 2px solid white;
   border-radius: 5px;
   box-shadow: 1px 2px 5px gray;
   padding: 15px;
@@ -67,8 +68,10 @@ form input {
 }
 
 form input:focus {
-  background-color: #E8F0FE;
+  background: linear-gradient(to right, #FFFFFF 60%, #E8F0FE);
+  border: 2px solid #5b86e5;
   outline: none;
+  transition: all .3s;
 }
 
 button {
@@ -103,4 +106,15 @@ button:hover {
   text-align: center;
   font-family: Raleway;
   font-size: 20px;
+}
+
+}
+
+@media all and (max-width: 650px) {
+  
+  .size-container, .weight-container {
+    flex: 0 0 90%;
+    padding: 15px 10px;
+  }
+
 }
